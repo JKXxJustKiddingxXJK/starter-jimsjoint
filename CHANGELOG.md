@@ -10,3 +10,8 @@
 ==V 1.3 (2016-10-02)==
     - Step 3
         - Added neworder function in the Order controller
+
+==V 1.4 (2016-10-02)==
+    - Step 4
+        -Added total method body to orders model
+        -Setup the checkout display

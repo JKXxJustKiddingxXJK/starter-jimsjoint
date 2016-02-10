@@ -34,8 +34,6 @@ class Order extends Application {
         if ($order_num == null)
             redirect('/order/neworder');
 
-        $order = $this->orders->get($order_num).
-
         $this->data['pagebody'] = 'show_menu';
         $this->data['order_num'] = $order_num;
         //FIXME
