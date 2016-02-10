@@ -24,3 +24,11 @@
     - Step 6
         -Added validation
         -Handling Checkout
+        
+=V 1.7.2 (2016-10-02)==
+    - Step 6
+        -Added commit
+        -Added cancel
+        -Removed orderitems from order controller
+            -Moved into Orders Model
+        

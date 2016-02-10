@@ -45,12 +45,25 @@ class Orders extends MY_Model {
 
     // retrieve the details for an order
     function details($num) {
+        $CI = & get_instance();
+        $items = $CI->orderitems->group($num);
+
+        foreach ($items as $item)
+        {
+            $menuitem = $this->menu->get($item->item);
+            $item->code = $menuitem->name;
+        }
+
+        return $items;
         
     }
 
     // cancel an order
     function flush($num) {
-        
+        $this->orderitems->delete_some($num);
+        $record = $this->orders->get($num);
+        $record->status = 'x';
+        $this->orders->update($record);
     }
 
     // validate an order
@@ -63,7 +76,7 @@ class Orders extends MY_Model {
         if(count($items) > 0)
             foreach($items as $item)
             {
-                $menu = $CI->meny->get($item->item);
+                $menu = $CI->menu->get($item->item);
                 $gotem[$menu->category] = 1;
             }
 

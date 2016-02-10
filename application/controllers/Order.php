@@ -93,14 +93,9 @@ class Order extends Application {
         //FIXME
         $this->data['total'] = number_format($this->orders->total($order_num), 2);
 
-        $items = $this->orderitems->group($order_num);
-        foreach ($items as $item)
-        {
-            $menuitem = $this->meny->get($item->item);
-            $item->code = $menuitem->name;
-        }
 
-        $this->data['items'] = $items;
+
+        $this->data['items'] = $this->orders->details($order_num);
         $this->data['okornot'] =
             $this->orders->validate($order_num) ? "" : "disabled";
 
@@ -121,10 +116,8 @@ class Order extends Application {
 
     // cancel the order
     function cancel($order_num) {
-        $this->orderitems->delete_some($order_num);
-        $record = $this->orders->get($order_num);
-        $record->status = 'x';
-        $this->orders->update($record);
+        $this->orders->flush($order_num);
+
         redirect('/');
     }
 
