@@ -56,7 +56,18 @@ class Orders extends MY_Model {
     // validate an order
     // it must have at least one item from each category
     function validate($num) {
-        return false;
+       $CI = & get_instance();
+        $items = $CI->orderitems->group($num);
+        $gotem = array();
+
+        if(count($items) > 0)
+            foreach($items as $item)
+            {
+                $menu = $CI->meny->get($item->item);
+                $gotem[$menu->category] = 1;
+            }
+
+        return isset($gotem['m']) && isset($gotem['d']) && isset($gotem['s']);
     }
 
 }
