@@ -15,3 +15,7 @@
     - Step 4
         -Added total method body to orders model
         -Setup the checkout display
+        
+==V 1.3 (2016-10-02)==
+    - Step 5
+        - Added add_item function in the Orders controller
